@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USM JMC</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/cosas.css' %}" type="text/css" rel="stylesheet" >
+   
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="{% static 'img/BarraColores.png' %}" alt="Barra de Colores">
+        <a class="navbar-brand ml-2" href="#">USM JMC</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Proyectos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <div id="home" class="full-screen" style="background-image: url('{% static "img/svm.jpg" %}')">
+        <div class="text-center text-white">
+            <h1>USM JMC</h1>
+            <button class="btn btn-primary-custom mt-4" onclick="scrollToSection('projects')">Ver Proyectos</button>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div id="projects" class="section">
+        <h2>Proyectos</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                    <!-- Data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login" class="section">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ingreso de Datos Section -->
+    {% if user.is_authenticated and user.usuario.is_estudiante %}
+    <div id="ingreso-datos" class="section">
+        <div class="ingreso-datos-form">
+            <h2>Ingreso de Datos</h2>
+            <form>
+                <!-- Aquí va el formulario para el ingreso de datos -->
+                <!-- Por favor, reemplaza este comentario con el código del formulario -->
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Fetch data from the database and populate the table
+        // Assume fetchProjects() makes an AJAX call to get the data
+        function fetchProjects() {
+            // Placeholder data
+            const projects = [
+                { id: 1, name: 'Project 1', description: 'Description 1' },
+                { id: 2, name: 'Project 2', description: 'Description 2' },
+                { id: 3, name: 'Project 3', description: 'Description 3' },
+            ];
+
+            const tableBody = document.getElementById('projects-table-body');
+            projects.forEach(project => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${project.id}</td><td>${project.name}</td><td>${project.description}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Call the function to fetch and display projects
+        fetchProjects();
+    </script>
+</body>
+</html>

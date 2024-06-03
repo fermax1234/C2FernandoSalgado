@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso de Propuesta de Proyecto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/cosas.css' %}" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="{% static 'img/BarraColores.png' %}" alt="Barra de Colores">
+        <a class="navbar-brand ml-2" href="#">USM JMC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'projects' %}">Proyectos</a></li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Ingreso de Propuesta Section -->
+    <div id="ingreso-propuesta" class="section">
+        <div class="container">
+            <h2>Ingreso de Propuesta de Proyecto</h2>
+            <form method="post" action="{% url 'ingreso_propuesta' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Aquí van los campos del formulario -->
+                <div class="form-group">
+                    <label for="titulo">Título del Proyecto</label>
+                    <input type="text" name="titulo" class="form-control" id="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea name="descripcion" class="form-control" id="descripcion" rows="5" required></textarea>
+                </div>
+                <!-- Otros campos del formulario si los hay -->
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+            
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

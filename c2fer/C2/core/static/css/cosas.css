@@ -1,0 +1,56 @@
+
+body, html {
+    height: 100%;
+    margin: 0;
+    scroll-behavior: smooth;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    background-color: #074469;
+}
+
+.navbar img {
+    height: 50px;
+}
+
+.full-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('{% static "img/svm.jpg" %}');
+    background-size: cover;
+    background-position: center;
+}
+
+.section {
+    height: 100vh;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.section#projects {
+    background-color: #f8f9fa;
+}
+
+.section#login {
+    background-color: #005e90;
+    color: white;
+}
+
+.btn-primary-custom {
+    background-color: #e5b300;
+    border-color: #e5b300;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+}
